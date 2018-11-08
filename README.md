@@ -1,6 +1,8 @@
 # Emlak Ofisim
 Masaüstü Emlak Yönetim Uygulaması
 
+![image](/EmlakOfisimGUI/main.png)
+
 İl ilçe bilgileri Json Deserialize ile işlenmiştir.
 Form görselliği ve bazı kontoller için  MaterialSkin kullanılmıştır.
 
@@ -11,3 +13,4 @@ https://github.com/IgnaceMaes/MaterialSkin
 https://github.com/JamesNK/Newtonsoft.Json
 
 https://github.com/life/il-ilce-mahalle-sokak-cadde-sql
+
