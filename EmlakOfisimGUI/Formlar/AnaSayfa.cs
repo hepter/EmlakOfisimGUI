@@ -23,6 +23,7 @@ namespace EmlakOfisimGUI
     public partial class AnaSayfa : MaterialForm
     {
         Logger log = Logger.Oluştur();
+        //DoubleBuffered etiketini tüm elemanlar için açar
         protected override CreateParams CreateParams
         {
             get
@@ -48,7 +49,7 @@ namespace EmlakOfisimGUI
         {
             get
             {
-              return flowLayoutPanel1.Controls.Count;
+                return flowLayoutPanel1.Controls.Count;
             }
         }
         public AnaSayfa()
@@ -73,8 +74,8 @@ namespace EmlakOfisimGUI
 
             DosyaIO dio = DosyaIO.Oluştur();
             dateTimePicker1.MaxDate = DateTime.Now;
-            foreach (SatılıkEv item in dio.emlakVeriOku(TUR.satılık))                  
-                yeniBirimEvEkle(item);       
+            foreach (SatılıkEv item in dio.emlakVeriOku(TUR.satılık))
+                yeniBirimEvEkle(item);
             foreach (KiralıkEv item in dio.emlakVeriOku(TUR.kiralık))
                 yeniBirimEvEkle(item);
 
@@ -97,28 +98,28 @@ namespace EmlakOfisimGUI
             sonrakiCbox = ((ComboBox)cbox.Parent.Controls["comboBox" + (boxSıra + 1)]);
             sonrakiCbox.DataSource = io.AdresYükle(boxSıra, cbox.SelectedValue.ToString());
             ComboTemizle(boxSıra);
-            sonrakiCbox.SelectedIndex = -1;        
+            sonrakiCbox.SelectedIndex = -1;
             label16.ForeColor = Color.Red;
 
         }
         private bool comboBoxFiltreTest(BirimEv ev)
         {
 
-            if (!(comboBox1.SelectedIndex == -1 || ev.ev.Adres.Il == comboBox1.SelectedValue.ToString()))            
-                return false;           
-            if (!(comboBox2.SelectedIndex == -1 || ev.ev.Adres.Ilçe == comboBox2.SelectedValue.ToString()))            
-                return false;            
-            if (!(comboBox3.SelectedIndex == -1 || ev.ev.Adres.Mahalle == comboBox3.SelectedValue.ToString()))            
+            if (!(comboBox1.SelectedIndex == -1 || ev.ev.Adres.Il == comboBox1.SelectedValue.ToString()))
                 return false;
-            if (!(comboBox4.SelectedIndex == -1 || ev.ev.Adres.Sokak == comboBox4.SelectedValue.ToString()))            
-                return false;            
-            return true;           
+            if (!(comboBox2.SelectedIndex == -1 || ev.ev.Adres.Ilçe == comboBox2.SelectedValue.ToString()))
+                return false;
+            if (!(comboBox3.SelectedIndex == -1 || ev.ev.Adres.Mahalle == comboBox3.SelectedValue.ToString()))
+                return false;
+            if (!(comboBox4.SelectedIndex == -1 || ev.ev.Adres.Sokak == comboBox4.SelectedValue.ToString()))
+                return false;
+            return true;
         }
 
         private bool aramaFiltreTest(BirimEv ev)
         {
-            
-            if (materialSingleLineTextField1.Text.Trim()=="") return true;
+
+            if (materialSingleLineTextField1.Text.Trim() == "") return true;
             string metin = ev.ev.Başlık;
             if (materialCheckBox1.Checked) metin += ev.ev.Not;
             metin = metin.ToLower();
@@ -135,7 +136,7 @@ namespace EmlakOfisimGUI
 
         private bool fiyatFiltreTest(BirimEv ev)
         {
-            if (label2.ForeColor==Color.Black) return true;            
+            if (label2.ForeColor == Color.Black) return true;
             int fiyat = ev.ev.FiyatHesapla();
             if (fiyat > (int)numericUpDown1.Value && fiyat < (int)numericUpDown2.Value)
             {
@@ -159,10 +160,10 @@ namespace EmlakOfisimGUI
             switch (tip)
             {
                 case TUR.satılık:
-                    if (materialCheckBox3.Checked)return true;                    
+                    if (materialCheckBox3.Checked) return true;
                     break;
                 case TUR.kiralık:
-                    if (materialCheckBox4.Checked)return true;                    
+                    if (materialCheckBox4.Checked) return true;
                     break;
             }
             return false;
@@ -180,7 +181,7 @@ namespace EmlakOfisimGUI
         private bool konutFiltreTest(BirimEv ev)
         {
             if (label13.ForeColor == Color.Black) return true;
-            if (ev.ev.Tipi.ToString()==comboBox5.SelectedValue.ToString())
+            if (ev.ev.Tipi.ToString() == comboBox5.SelectedValue.ToString())
             {
                 return true;
             }
@@ -189,8 +190,8 @@ namespace EmlakOfisimGUI
         private bool tarihFiltreTest(BirimEv ev)
         {
             if (label14.ForeColor == Color.Black) return true;
-            int seçiliRadioNo =int.Parse(panel19.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Name.ToString().Replace("materialRadioButton",""));
-            DateTime tarih=DateTime.Now;
+            int seçiliRadioNo = int.Parse(panel19.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Name.ToString().Replace("materialRadioButton", ""));
+            DateTime tarih = DateTime.Now;
             switch (seçiliRadioNo)
             {
                 case 1:
@@ -207,10 +208,10 @@ namespace EmlakOfisimGUI
                     break;
                 case 5:
                     tarih = new DateTime(DateTime.Now.Subtract(dateTimePicker1.Value).Ticks);
-                    break;             
+                    break;
             }
 
-            if (ev.ev.YapımTarihi>tarih)
+            if (ev.ev.YapımTarihi > tarih)
             {
                 return true;
             }
@@ -220,9 +221,9 @@ namespace EmlakOfisimGUI
         {
             DosyaIO io = DosyaIO.Oluştur();
             FileInfo[] resim = io.resimList(ev.ev.EmlakNo);
-       
 
-            if ((resim != null&& resim.Count()> 0)|| (!materialCheckBox5.Checked))
+
+            if ((resim != null && resim.Count() > 0) || (!materialCheckBox5.Checked))
             {
                 return true;
             }
@@ -235,7 +236,7 @@ namespace EmlakOfisimGUI
                 if (!ev.ev.Aktifmi)
                 {
                     ev.Visible = true;
-                }                
+                }
                 return true;
             }
             else
@@ -244,25 +245,25 @@ namespace EmlakOfisimGUI
                 {
                     return true;
                 }
-            }            
-            return false;            
+            }
+            return false;
         }
-       
-       
+
+
         public void ComboTemizle(int HaricOlanNo)
         {
-            for (int i = HaricOlanNo+2; i < 5; i++)
-            {                 
-                ComboBox cbox = (ComboBox)tableLayoutPanel6.Controls["comboBox"+i];              
+            for (int i = HaricOlanNo + 2; i < 5; i++)
+            {
+                ComboBox cbox = (ComboBox)tableLayoutPanel6.Controls["comboBox" + i];
                 cbox.DataSource = null;
             }
 
 
             for (int i = HaricOlanNo + 1; i < 5; i++)
-            {                
-                ComboBox cbox = (ComboBox)tableLayoutPanel6.Controls["comboBox" + i];    
+            {
+                ComboBox cbox = (ComboBox)tableLayoutPanel6.Controls["comboBox" + i];
                 if (cbox.Items.Count == 0)
-                {                  
+                {
                     cbox.Enabled = false;
                     cbox.DataSource = null;
                 }
@@ -271,12 +272,12 @@ namespace EmlakOfisimGUI
                     cbox.Enabled = true;
                     ComboTemizle(ref cbox);
                 }
-           
+
             }
         }
-        public void ComboTemizle(ref ComboBox box )
-        {                 
-             box.DataSource = box.Items.Cast<string>().Select(a => a.ToString()).Where(aa => aa.Trim() != "").ToArray();
+        public void ComboTemizle(ref ComboBox box)
+        {
+            box.DataSource = box.Items.Cast<string>().Select(a => a.ToString()).Where(aa => aa.Trim() != "").ToArray();
         }
 
 
@@ -290,20 +291,20 @@ namespace EmlakOfisimGUI
         private void materialCheckBox2_CheckedChanged(object sender, EventArgs e)
         {
 
-            Size fark=(Size)kordinatfark( button6.PointToClient(Point.Empty), panel1.PointToClient(Point.Empty));
-            Size fark2 =(Size)kordinatfark(button4.PointToClient(Point.Empty), panel1.PointToClient(Point.Empty));
+            Size fark = (Size)kordinatfark(button6.PointToClient(Point.Empty), panel1.PointToClient(Point.Empty));
+            Size fark2 = (Size)kordinatfark(button4.PointToClient(Point.Empty), panel1.PointToClient(Point.Empty));
             int en = button4.Size.Width;
             if (materialCheckBox2.Checked)
             {
-                panel1.Size = new Size(en, fark.Height+button6.Size.Height);                
+                panel1.Size = new Size(en, fark.Height + button6.Size.Height);
                 materialCheckBox2.Text = "Filtrele ▼";
                 materialFlatButton1.Enabled = true;
             }
             else
             {
-                panel1.Size = new Size( en, fark2.Height + button4.Size.Height);
+                panel1.Size = new Size(en, fark2.Height + button4.Size.Height);
                 materialCheckBox2.Text = "Filtrele ▲";
-                materialFlatButton1.Enabled = false ;
+                materialFlatButton1.Enabled = false;
             }
 
         }
@@ -313,24 +314,22 @@ namespace EmlakOfisimGUI
         {
             Point yeni = Point.Subtract(p2, (Size)p1);
             return yeni;
-        }      
+        }
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
-                     
             panelOtoSündür();
-
         }
         public void panelOtoSündür()
         {
             foreach (Control item in tableLayoutPanel1.Controls)
             {
-                item.Size =new Size(splitContainer1.SplitterDistance -23, item.Size.Height);
+                item.Size = new Size(splitContainer1.SplitterDistance - 23, item.Size.Height);
             }
 
             panel1.Size = new Size(splitContainer1.SplitterDistance - 23, panel1.Size.Height);
             panel3.Size = new Size(splitContainer1.SplitterDistance - 23, panel3.Size.Height);
             tableLayoutPanel2.Size = new Size(splitContainer1.SplitterDistance - 23, tableLayoutPanel2.Size.Height);
-            
+
             int en = (flowLayoutPanel1.Width - 20) / 2;
             foreach (BirimEv con in flowLayoutPanel1.Controls)
             {
@@ -338,51 +337,44 @@ namespace EmlakOfisimGUI
             }
         }
 
-        public void illeriComboboxYükle(EmlakIO iom=null)
+        public void illeriComboboxYükle(EmlakIO iom = null)
         {
             EmlakIO io = iom;
-            if (iom==null)
+            if (iom == null)
             {
-                io=EmlakIO.Oluştur();
-            }         
+                io = EmlakIO.Oluştur();
+            }
             comboBox1.DataSource = io.AdresYükle(0, "");
             comboBox1.SelectedIndex = -1;
         }
-      
+
 
         private void materialRaisedButton1_Click(object sender, EventArgs e)
         {
             ComboTemizle(0);
             adresFiltreSıfırla();
-      
+
         }
 
-       
+
 
         private void AnaSayfa_MaximizedBoundsChanged(object sender, EventArgs e)
         {
             panelOtoSündür();
         }
 
-      
-        private void AnaSayfa_ResizeBegin(object sender, EventArgs e)
-        {
-            // flowLayoutPanel1.SuspendLayout();
-            // DrawingControl.SuspendDrawing(splitContainer1);
-            //  SuspendUpdate.Suspend(splitContainer1.Panel2);
-            //   splitContainer1.Refresh();
-        }
+
         private void AnaSayfa_ResizeEnd(object sender, EventArgs e)
         {
-            panelOtoSündür();      
+            panelOtoSündür();
         }
-        
-     
+
+
         private void button8_Click(object sender, EventArgs e)
         {
             KonutEkle konut = new KonutEkle(EKLEMETURU.yeniekle);
-         
-            if (konut.ShowDialog()==DialogResult.OK)
+
+            if (konut.ShowDialog() == DialogResult.OK)
             {
                 DosyaIO io = DosyaIO.Oluştur();
                 io.emlakVeriEkle(konut.Ev);
@@ -410,7 +402,7 @@ namespace EmlakOfisimGUI
                 panelOtoSündür();
                 seçimStringGüncelle();
             }
-       
+
         }
         private void panel6blurEkranı_VisibleChanged(object sender, EventArgs e)
         {
@@ -430,7 +422,7 @@ namespace EmlakOfisimGUI
             if (seçiliEvSayısı == 0) return;
             string msj = String.Format("Seçilen {0} adet Konutu kaldırmak istediğinize emin misiniz?\n(Konutlar arşivlenecektir)", seçiliEvSayısı);
             DialogResult sonuc = MessageBox.Show(msj, "Kaldırma Uyarısı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (sonuc==DialogResult.Yes)
+            if (sonuc == DialogResult.Yes)
             {
                 foreach (BirimEv ev in flowLayoutPanel1.Controls)
                 {
@@ -443,7 +435,7 @@ namespace EmlakOfisimGUI
                         DosyaIO io = DosyaIO.Oluştur();
                         io.emlakVeriGüncelle(ev.ev);
                         seçimStringGüncelle();
-                        
+
                     }
                 }
                 log.logEkle($"{seçiliEvSayısı} adet ev silindi!", LOGSEVIYE.bilgi);
@@ -539,7 +531,7 @@ namespace EmlakOfisimGUI
         {
             materialRadioButton5.Checked = true;
             dateTimePicker1.MaxDate = DateTime.Now.AddMinutes(1);
-            dateTimePicker1.Value = DateTime.Now;                   
+            dateTimePicker1.Value = DateTime.Now;
             button13.Visible = false;
             label14.ForeColor = Color.Black;
             materialRadioButton5.Focus();

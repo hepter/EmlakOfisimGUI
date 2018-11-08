@@ -23,7 +23,7 @@ namespace EmlakOfisimGUI
             log = Logger.Oluştur();
         }
 
-      
+
         private void materialRaisedButton2_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -37,17 +37,18 @@ namespace EmlakOfisimGUI
             if (!io.Kullanıcı.isNotNull)
             {
                 MessageBox.Show("Giriş bilgileri dosyası eksik.\nGiriş yapılamaz!");
-                log.logEkle($"Giriş Dosyası eksik.{Global.UserTxt} Yolunda dosya olduğundan emin olun",LOGSEVIYE.hata);
+                log.logEkle($"Giriş Dosyası eksik.{Global.UserTxt} Yolunda dosya olduğundan emin olun", LOGSEVIYE.hata);
             }
-          
+
             else if (io.Kullanıcı == kull)
             {
                 AnaSayfa sayfa = new AnaSayfa();
                 materialRaisedButton1.Text = "Giriş Yapılıyor...";
                 Application.DoEvents();
-              //bunu eklemezsek yeni oluşan form kapanır ancak bu arkaplanca açık kalacaktır
-              //yeni formun kapatma eventine bu formunkini verirsek bu kapanınca hiyerarşik olarak her ikisi kapanacaktır
-              sayfa.Closed += (a, b) => this.Close();
+
+                //bunu eklemezsek yeni oluşan form kapanır ancak bu arkaplanca açık kalacaktır
+                //yeni formun kapatma eventine bu formunkini verirsek bu kapanınca hiyerarşik olarak her ikisi kapanacaktır
+                sayfa.Closed += (a, b) => this.Close();
                 sayfa.Show();
 
                 log.logEkle("başarıyla giriş yapıldı", LOGSEVIYE.bilgi);

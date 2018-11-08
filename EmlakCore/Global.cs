@@ -16,7 +16,7 @@ namespace EmlakCore
         public static string NullResimYol = AppDir + @"resimler\null.png";
         public static string LoggerTxtYol = AppDir + @"Log.txt";
 
-        public const string RoomCostKatsayı = "200";
+        public const string RoomCostKatsayı = "200";//varsayılan değer
         public const char böl1 = '|';
         public const char böl2 = '+';
         public static char[] yenisatir = new char[] { '\r','\n' };       

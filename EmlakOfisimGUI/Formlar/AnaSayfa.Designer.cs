@@ -1527,7 +1527,6 @@
             this.Text = "ANASAYFA";
             this.MaximizedBoundsChanged += new System.EventHandler(this.AnaSayfa_MaximizedBoundsChanged);
             this.Load += new System.EventHandler(this.AnaSayfa_Load);
-            this.ResizeBegin += new System.EventHandler(this.AnaSayfa_ResizeBegin);
             this.ResizeEnd += new System.EventHandler(this.AnaSayfa_ResizeEnd);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

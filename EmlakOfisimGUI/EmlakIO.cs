@@ -14,6 +14,7 @@ namespace EmlakOfisimGUI
 
 
     #region Json Deseriaze Sınıfları
+    
     public class adresDB
     {
         public ilçeler ilçe;
@@ -23,12 +24,9 @@ namespace EmlakOfisimGUI
     }
     public class ilçeler
     {
-        public string a, b, c;
+        public string a, b, c;//silinmesi hataya sebebiyet verir gereksiz olduğu için kullanılmamıştır ancak atama uygulanır
         [JsonProperty(PropertyName = "data")]
         public List<ilçe> ilçeList;
-
-
-
         public List<ilçe> ilçeGetir(string plaka)
         {
             var sonuc = ilçeList.Where(a => a.ilce_sehirkey == plaka).Select(a => a).ToList();
@@ -43,14 +41,11 @@ namespace EmlakOfisimGUI
         public string ilce_sehirkey;
     }
 
-
     public class mahalleler
     {
         public string a, b, c;
         [JsonProperty(PropertyName = "data")]
         public List<mahalle> mhList;
-
-
         public List<mahalle> mhGetir(string ilçeKey)
         {
             var sonuc = mhList.Where(a => a.mahalle_ilcekey == ilçeKey).ToList();
@@ -65,13 +60,6 @@ namespace EmlakOfisimGUI
         public string mahalle_key;
         public string mahalle_ilcekey;
     }
-
-
-
-
-
-
-
     public class iller
     {
         public string a, b, c;
@@ -84,28 +72,17 @@ namespace EmlakOfisimGUI
         public string sehir_title;
         public string sehir_key;
     }
-
-
-
-
-
-
     public class Sokaklar
     {
 
         public string a, b, c;
         [JsonProperty(PropertyName = "data")]
         public List<Sokak> skList;
-
-
         public List<Sokak> skGetir(string mhKey)
         {
             var sonuc = skList.Where(a => a.sokak_cadde_mahallekey == mhKey).ToList();
             return sonuc;
         }
-
-
-
     }
     public class Sokak
     {
@@ -133,8 +110,7 @@ namespace EmlakOfisimGUI
                 theImage = Image.FromStream(new MemoryStream(img));
                 img = null;
                 log.logEkle(fileName + " - resim tekrar silinebilecek şekilde kopyalandı", LOGSEVIYE.bilgi);
-            }
-          //  GC.Collect();
+            }       
             return theImage;
         }
 
@@ -151,8 +127,6 @@ namespace EmlakOfisimGUI
             }
             return io;
         }
-
-
         public void JsonOku()
         {
             if (adresJsonData != null) return;
@@ -170,7 +144,6 @@ namespace EmlakOfisimGUI
                     //adresDB cf = serializer.Deserialize<adresDB>(reader);
                     if (reader.TokenType == JsonToken.StartObject)
                     {
-
                         ilçeler c1 = serializer.Deserialize<ilçeler>(reader);
                         reader.Read();
                         mahalleler c2 = serializer.Deserialize<mahalleler>(reader);
@@ -186,11 +159,6 @@ namespace EmlakOfisimGUI
             }
              adresJsonData=adresData;
         }
-
-
-
-
-
 
         Dictionary<int, Dictionary<string, string>> CboxS = new Dictionary<int, Dictionary<string, string>>()
         {
